@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import styles from './tarefas.module.scss';
+import tarefasStyles from './tarefas.module.scss';  // Renomeando o estilo das tarefas
+import adicionarStyles from './modal.adicionar.module.scss';  // Estilo para adicionar modal
+import deletarStyles from './modal.deletar.module.scss';  // Estilo para deletar modal
+
 import Image from 'next/image';
 import logo from '../src/logo.png'; // Caminho ajustado
 
@@ -39,37 +42,37 @@ const Tarefas = () => {
 
   const confirmDeleteTarefa = () => {
     if (tarefaParaDeletar) {
-      setTarefas(tarefas.filter((tarefa) => tarefa.id !== tarefaParaDeletar.id));
+      setTarefas(tarefas.filter((tarefa) => tarefa.id !== tarefaParaDeletar?.id));
       setTarefaParaDeletar(null);
       setModalDeleteVisible(false);
     }
   };
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
+    <div className={tarefasStyles.container}>
+      <header className={tarefasStyles.header}>
+        <div className={tarefasStyles.logoContainer}>
           <Image src={logo} alt="FocalPoint logo" width={50} height={50} />
-          <span className={styles.logoText}>FocalPoint</span>
+          <span className={tarefasStyles.logoText}>FocalPoint</span>
         </div>
-        <div className={styles.welcome}>
+        <div className={tarefasStyles.welcome}>
           <h1>Bem-vindo de volta, Marcus</h1>
         </div>
-        <div className={styles.date}>
+        <div className={tarefasStyles.date}>
           <span>Segunda, 01 de dezembro de 2025</span>
         </div>
       </header>
 
-      <div className={styles.tarefasContainer}>
+      <div className={tarefasStyles.tarefasContainer}>
         <h2>Suas tarefas de hoje</h2>
-        <ul className={styles.tarefasList}>
+        <ul className={tarefasStyles.tarefasList}>
           {tarefas.map((tarefa) => (
             <li key={tarefa.id}>
               <input type="checkbox" />
               {tarefa.nome}
-              {tarefa.hot && <span className={styles.hot}>HOT</span>}
+              {tarefa.hot && <span className={tarefasStyles.hot}>HOT</span>}
               <button
-                className={styles.deleteButton}
+                className={tarefasStyles.deleteButton}
                 onClick={() => handleDeleteTarefa(tarefa)}
               >
                 🗑️
@@ -79,7 +82,7 @@ const Tarefas = () => {
         </ul>
 
         <button
-          className={styles.addButton}
+          className={tarefasStyles.addButton}
           onClick={() => setModalVisible(true)}
         >
           Adicionar nova tarefa
@@ -87,23 +90,23 @@ const Tarefas = () => {
       </div>
 
       {modalVisible && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <h2 className={styles.modalTitle}>Nova tarefa</h2>
-            <label htmlFor="titulo" className={styles.modalLabel}>Título</label>
+        <div className={adicionarStyles.modalOverlay}>
+          <div className={adicionarStyles.modalContent}>
+            <h2 className={adicionarStyles.modalTitle}>Nova tarefa</h2>
+            <label htmlFor="titulo" className={adicionarStyles.modalLabel}>Título</label>
             <input
               id="titulo"
               type="text"
               placeholder="Digite"
               value={novaTarefa}
               onChange={(e) => setNovaTarefa(e.target.value)}
-              className={styles.modalInput}
+              className={adicionarStyles.modalInput}
             />
-            <div className={styles.modalButtons}>
-              <button onClick={() => setModalVisible(false)} className={styles.cancelButton}>
+            <div className={adicionarStyles.modalButtons}>
+              <button onClick={() => setModalVisible(false)} className={adicionarStyles.cancelButton}>
                 Cancelar
               </button>
-              <button onClick={handleAddTarefa} disabled={!novaTarefa} className={styles.addButton}>
+              <button onClick={handleAddTarefa} disabled={!novaTarefa} className={adicionarStyles.addButton}>
                 Adicionar
               </button>
             </div>
@@ -112,15 +115,15 @@ const Tarefas = () => {
       )}
 
       {modalDeleteVisible && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
+        <div className={deletarStyles.modalOverlay}>
+          <div className={deletarStyles.modalContent}>
             <h2>Deletar tarefa</h2>
             <p>Tem certeza que deseja deletar essa tarefa?</p>
-            <div className={styles.modalButtons}>
-              <button onClick={() => setModalDeleteVisible(false)} className={styles.cancelButton}>
+            <div className={deletarStyles.modalButtons}>
+              <button onClick={() => setModalDeleteVisible(false)} className={deletarStyles.cancelButton}>
                 Cancelar
               </button>
-              <button onClick={confirmDeleteTarefa} className={styles.delete}>
+              <button onClick={confirmDeleteTarefa} className={deletarStyles.delete}>
                 Deletar
               </button>
             </div>
