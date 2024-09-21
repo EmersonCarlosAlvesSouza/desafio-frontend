@@ -11,9 +11,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0; /* Ajuste de padding para espaçar mais os elementos no header */
-  border-bottom: 1px solid #D7DDE9; /* Cor da borda */
-  margin-bottom: 20px; /* Espaço entre o header e o conteúdo */
+  padding: 24px 0;
+  border-bottom: 1px solid #D7DDE9;
+  margin-bottom: 20px;
 }
 
 .logoContainer {
@@ -31,7 +31,6 @@
   font-size: 24px;
   font-weight: bold;
   color: #0070f3;
-  font-family: Arial, sans-serif;
 }
 
 .welcome {
@@ -51,13 +50,13 @@
 }
 
 .tarefasContainer {
-  width: 450px; /* Largura fixa para centralizar o conteúdo */
+  width: 450px;
   background: white;
   padding: 32px;
   border-radius: 16px;
   border: 1px solid #EAECF0;
   box-shadow: 0 2px 8px rgba(16, 24, 40, 0.05);
-  margin: 100px auto 0; /* Margin superior para afastar do header */
+  margin: 100px auto 0;
 }
 
 .tarefasList {
@@ -94,7 +93,15 @@
   cursor: pointer;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .addButton {
+  width: 450px;
+  height: 51px;
   background: linear-gradient(90deg, #079BD3 0%, #53C0F0 100%);
   color: white;
   border: none;

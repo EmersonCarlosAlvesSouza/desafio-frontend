@@ -80,7 +80,10 @@ const Tarefas = () => {
             </li>
           ))}
         </ul>
+      </div>
 
+      {/* Colocando o botão fora da div de tarefas */}
+      <div className={tarefasStyles.buttonContainer}>
         <button
           className={tarefasStyles.addButton}
           onClick={() => setModalVisible(true)}
