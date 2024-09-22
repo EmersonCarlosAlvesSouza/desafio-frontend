@@ -7,24 +7,50 @@ import deletarStyles from './modal.deletar.module.scss';  // Estilo para deletar
 
 import Image from 'next/image';
 import logo from '../src/logo.png'; // Caminho ajustado
+import lixeira from '../src/lixeira.png'; // Caminho ajustado
+
 
 interface Tarefa {
   id: number;
   nome: string;
   completed: boolean;
-  hot?: boolean;
+  
 }
 
 const Tarefas = () => {
   const [tarefas, setTarefas] = useState<Tarefa[]>([
     { id: 1, nome: 'Lavar as mãos', completed: false },
-    { id: 2, nome: 'Fazer um bolo', completed: false, hot: true },
+    { id: 2, nome: 'Fazer um bolo', completed: false },
     { id: 3, nome: 'Lavar a louça', completed: false },
   ]);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [modalDeleteVisible, setModalDeleteVisible] = useState(false);
   const [tarefaParaDeletar, setTarefaParaDeletar] = useState<Tarefa | null>(null);
   const [novaTarefa, setNovaTarefa] = useState('');
+
+  // Função para formatar a data atual
+  const formatarDataAtual = () => {
+    const data = new Date();
+    const opcoes: Intl.DateTimeFormatOptions = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    return data.toLocaleDateString('pt-BR', opcoes);
+  };
+
+
+  // Handle the task completion (move to "Tarefas Finalizadas")
+  const handleCompleteTarefa = (id: number) => {
+    setTarefas((prevTarefas) =>
+      prevTarefas.map((tarefa) =>
+        tarefa.id === id ? { ...tarefa, completed: !tarefa.completed } : tarefa
+      )
+    );
+  };
+
 
   const handleAddTarefa = () => {
     setTarefas([
@@ -59,27 +85,62 @@ const Tarefas = () => {
           <h1>Bem-vindo de volta, Marcus</h1>
         </div>
         <div className={tarefasStyles.date}>
-          <span>Segunda, 01 de dezembro de 2025</span>
+          <span>{formatarDataAtual()}</span>
         </div>
       </header>
 
       <div className={tarefasStyles.tarefasContainer}>
-        <h2>Suas tarefas de hoje</h2>
+      <h2 className={tarefasStyles.suasTarefas}>Suas tarefas de hoje</h2>
         <ul className={tarefasStyles.tarefasList}>
-          {tarefas.map((tarefa) => (
-            <li key={tarefa.id}>
-              <input type="checkbox" />
-              {tarefa.nome}
-              {tarefa.hot && <span className={tarefasStyles.hot}>HOT</span>}
-              <button
-                className={tarefasStyles.deleteButton}
-                onClick={() => handleDeleteTarefa(tarefa)}
-              >
-                🗑️
-              </button>
-            </li>
-          ))}
+          {tarefas
+            .filter((tarefa) => !tarefa.completed)
+            .map((tarefa) => (
+              <li key={tarefa.id}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleCompleteTarefa(tarefa.id)}
+                  checked={tarefa.completed}
+                />
+                {tarefa.nome}
+                
+                <button
+                  className={tarefasStyles.deleteButton}
+                  onClick={() => handleDeleteTarefa(tarefa)}
+                >
+                  <Image src={lixeira} alt="Lixeira" width={20} height={20} />
+                </button>
+              </li>
+            ))}
         </ul>
+
+        {/* Completed tasks */}
+        <h2 className={tarefasStyles.tarefasFinalizadas}>Tarefas finalizadas</h2>
+        <ul className={tarefasStyles.tarefasList}>
+          {tarefas
+            .filter((tarefa) => tarefa.completed)  // Filtrar apenas as tarefas concluídas
+            .map((tarefa) => (
+              <li key={tarefa.id} className={tarefasStyles.completed}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleCompleteTarefa(tarefa.id)}
+                  checked={tarefa.completed}
+                />
+                {tarefa.nome}
+                <button
+                  className={tarefasStyles.deleteButton}
+                  onClick={() => handleDeleteTarefa(tarefa)}
+                  
+                >
+                  <Image src={lixeira} alt="Lixeira" width={20} height={20} />
+
+                  
+                </button>
+              </li>
+            ))}
+        </ul>
+
+
+
       </div>
 
       {/* Colocando o botão fora da div de tarefas */}
@@ -126,7 +187,7 @@ const Tarefas = () => {
               <button onClick={() => setModalDeleteVisible(false)} className={deletarStyles.cancelButton}>
                 Cancelar
               </button>
-              <button onClick={confirmDeleteTarefa} className={deletarStyles.delete}>
+              <button onClick={confirmDeleteTarefa} className={deletarStyles.deleteButton}>
                 Deletar
               </button>
             </div>
