@@ -29,17 +29,7 @@ const Tarefas = () => {
   const [tarefaParaDeletar, setTarefaParaDeletar] = useState<Tarefa | null>(null);
   const [novaTarefa, setNovaTarefa] = useState('');
 
-  // Função para formatar a data atual
-  const formatarDataAtual = () => {
-    const data = new Date();
-    const opcoes: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return data.toLocaleDateString('pt-BR', opcoes);
-  };
+
 
 
   // Handle the task completion (move to "Tarefas Finalizadas")
@@ -85,7 +75,7 @@ const Tarefas = () => {
           <h1>Bem-vindo de volta, Marcus</h1>
         </div>
         <div className={tarefasStyles.date}>
-          <span>{formatarDataAtual()}</span>
+          <span>Segunda, 01 de dezembro de 2025</span>
         </div>
       </header>
 

@@ -1,3 +1,21 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9); /* Fundo branco com menos transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(15px); /* Aumenta o desfoque */
+  -webkit-backdrop-filter: blur(15px); /* Prefixo para compatibilidade */
+}
+
+
+
+
 .container {
   width: 100%;
   max-width: 1200px;
@@ -6,6 +24,7 @@
   padding: 0 20px;
   text-align: center;
 }
+
 
 .header {
   display: flex;
@@ -24,33 +43,34 @@
 .logo {
   width: 40px;
   height: auto;
-  margin-right: 10px;
+  padding-left: 40px;
 }
 
 .logoText {
   font-size: 24px;
   font-weight: bold;
-  color: #0070f3;
+  color: #000000;
+  margin-left: 10px;
 }
 
 .welcome {
   text-align: center;
   flex: 1;
   display: flex;
-  justify-content: center;  /* Centraliza o texto de boas-vindas */
+  justify-content: center; /* Centraliza o texto de boas-vindas */
   flex-direction: column;
   align-items: center;
 }
 
 .welcome h1 {
-  font-family: 'Inter', sans-serif;  /* Aplicando a fonte Inter Tight */
-  font-size: 24px;  /* Tamanho da fonte */
-  font-weight: bold;  /* Negrito */
-  letter-spacing: -2%;  /* Espaçamento entre letras */
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -2%;
   margin: 0;
-  line-height: 29px;  /* Ajuste da altura da linha */
-  color: #000;  /* Cor preta mais forte */
-  white-space: nowrap;  /* Forçar o texto a ficar em uma única linha */
+  line-height: 29px;
+  color: #000;
+  white-space: nowrap;
 }
 
 .date {
@@ -71,14 +91,14 @@
 
 .tarefasList {
   list-style-type: none;
-  padding: 0;
+  padding: 30px;
   margin: 0;
 }
 
 .tarefasList li {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* Alinha os itens à esquerda */
+  justify-content: flex-start;
   padding: 15px 10px;
   border: 1px dashed #ddd;
   border-radius: 8px;
@@ -90,16 +110,7 @@
 .tarefasList li:hover {
   background-color: #f5f5f5;
 }
-/* Para estilizar as tarefas não completadas */
-.tarefasList li:not(.completed) label {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19.36px;
-  letter-spacing: -0.02em;
-  color: #000000; /* Cor #000000 (preto) */
-}
-/* Para estilizar o checkbox */
+
 .tarefasList li input[type="checkbox"] {
   appearance: none;
   width: 24px;
@@ -109,13 +120,13 @@
   background-color: #fff;
   position: relative;
   cursor: pointer;
-  margin-right: 10px; /* Espaçamento entre o checkbox e o texto */
+  margin-right: 10px;
 }
 
 .tarefasList li input[type="checkbox"]:checked {
   background-color: #79C7FF;
   border: none;
-  content: url('../src/check.png');  /* Ícone SVG de check */
+  content: url('../src/check.png');
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,8 +134,8 @@
 
 .tarefasList li label {
   flex-grow: 1;
-  text-align: left;  /* Garante que o texto das tarefas fique à esquerda */
-  margin-left: 10px;  /* Ajusta o espaçamento entre o checkbox e o texto */
+  text-align: left;
+  margin-left: 10px;
 }
 
 .tarefasList li.completed {
@@ -138,13 +149,12 @@
   height: 20px;
   border: none;
   cursor: pointer;
-  margin-left: auto;  /* Garante que o ícone da lixeira fique à direita */
+  margin-left: auto;
 }
 
-
-
 .addButton {
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   height: 51px;
   background: linear-gradient(90deg, #079BD3 0%, #53C0F0 100%);
   color: white;
@@ -164,40 +174,54 @@
   cursor: not-allowed;
 }
 
-.tarefasList li .deleteButton {
-  margin-left: auto;
-}
-
-.tarefasList li.completed .deleteButton {
-  margin-left: auto;
-}
-
-.tarefasList .hot {
-  margin-right: 10px;
-}
 .buttonContainer {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-/* Para estilizar "Suas tarefas de hoje" */
-.suasTarefas {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19.36px;
-  letter-spacing: -0.02em;
-  color: rgba(0, 0, 0, 0.54); /* Cor com 54% de opacidade */
-}
+@media screen and (max-width: 768px) {
+  .tarefasContainer {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    margin-top: 50px;
+  }
 
-/* Para estilizar "Tarefas finalizadas" */
-.tarefasFinalizadas {
-  font-family: 'Inter Tight', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19.36px;
-  letter-spacing: -0.02em;
-  color: rgba(0, 0, 0, 0.54); /* Cor com 54% de opacidade */
-}
+  .addButton {
+    max-width: 100%;
+    width: 100%;
+  }
 
+  .tarefasList {
+    padding: 0;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logoContainer {
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .logo {
+    padding-left: 0;
+    width: 30px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .welcome h1 {
+    font-size: 20px;
+  }
+
+  .date {
+    text-align: left;
+    margin-top: 10px;
+  }
+}
