@@ -1,18 +1,20 @@
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.9); /* Fundo branco com menos transparência */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(15px); /* Aumenta o desfoque */
-  -webkit-backdrop-filter: blur(15px); /* Prefixo para compatibilidade */
+.suasTarefas {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.36px;
+  letter-spacing: -2%;
+  color: rgba(0, 0, 0, 0.54); /* Cor preta com 54% de opacidade */
 }
 
+.tarefasFinalizadas {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.36px;
+  letter-spacing: -2%;
+  color: rgba(0, 0, 0, 0.54); /* Cor preta com 54% de opacidade */
+}
 
 
 
@@ -20,7 +22,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  font-family: 'Inter Tight', sans-serif;
   padding: 0 20px;
   text-align: center;
 }
@@ -51,6 +53,7 @@
   font-weight: bold;
   color: #000000;
   margin-left: 10px;
+  font-family: 'Inter Tight', sans-serif;
 }
 
 .welcome {
@@ -63,7 +66,7 @@
 }
 
 .welcome h1 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter Tight', sans-serif;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: -2%;
